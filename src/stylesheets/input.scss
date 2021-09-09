@@ -1,0 +1,60 @@
+@mixin fl {
+  display: flex;  
+}
+
+@mixin fl_col {
+  display: flex;
+  flex-flow: column;
+}
+
+@mixin fl_col_wrap {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+@mixin fl_row {
+  display: flex;
+  flex-flow: row;
+}
+
+@mixin fl_al_center {
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin fl_al_space-btwn {
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin fl_al_space-ar {
+  justify-content: space-around;
+  align-items: center;
+}
+
+@mixin fl_al_space-ev {
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@mixin fl_al_st {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin fl_al_end {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.icon {
+  width: 20px / 210px * 100%;
+}
+
+.main {
+  width: 350px / 1920px * 100%;
+}
+
+.drop-menu {
+  @include fl_row();
+}
