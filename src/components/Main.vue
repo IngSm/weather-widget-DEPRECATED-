@@ -16,18 +16,27 @@
 </template>
 
 <script>
-import Service from '@/api/service.js'
+import axios from 'axios'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      city: '',
-      code: ''
+      city: 'London',
+      code: 'uk'
     }
   },
-  mounted: {
-    weather () {
-      Service.get('London', 'uk')
-    }
+  methods: {
+  },
+  mounted () {
+    let a = axios(`http://api.openweathermap.org/data/2.5/weather?q=${this.city},${this.code}&APPID=d23058db742db7cb6fe57437bd010579`)
+    a.then(function(result){
+      console.log(result)
+    })
+  },
+  computed: {
+      ...mapGetters({
+        weather: 'getCityWeather'
+      })
   }
 }
 </script>
