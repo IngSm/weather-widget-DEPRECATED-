@@ -14,7 +14,7 @@ export default new Vuex.Store({
   },
   mutations: {
     getCityWeather (state, cityWeather) {
-      state.weather[cityWeather]
+      state.weather.push(cityWeather)
       console.log('mutated')
     },
     deleteCityWeather () {
