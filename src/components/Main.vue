@@ -41,7 +41,7 @@
           <img class="icon" src="@/assets/svgs/wind.svg" alt="">
           <div
             class="text text_marginL"
-            v-text="`${this.gottenWeather[0].wind.speed}kmH`"
+            v-text="`${this.gottenWeather[0].wind.speed} kmH`"
           />
         </div>
         <div class="flStart">
@@ -55,11 +55,11 @@
       <div class="text-block__right">
         <div
           class="text"
-          v-text="`Visibility:${this.visibility}km`"
+          v-text="`Visibility:${this.visibility} km`"
         />
         <div
           class="text"
-          v-text="`Pressure:${this.pressure}hPa`"
+          v-text="`Pressure:${this.pressure} hPa`"
         />
       </div>
     </div>
@@ -72,8 +72,7 @@ import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      city: 'London',
-      code: 'uk',
+      city: 'Munich',
       currentTime: ''
     }
   },
@@ -82,12 +81,12 @@ export default {
       console.log(1)
     },
     updateTime () {
-      this.currentTime = this.$moment().format('ddd DD.MM hh:mm')
+      this.currentTime = this.$moment().format('ddd DD.MM HH:mm')
     }
   },
   mounted () {
     axios
-      .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city},${this.code}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
+      .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
       .then(res => {
         this.$store.dispatch('setCityWeather', res.data)
       })
@@ -117,14 +116,6 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  margin: 0;
-  padding: 10px;
-  background: #66B2FF;
-  border-radius: 20px;
-  box-shadow: -2px 2px #3399FF;
-}
-
 .text {
   text-transform: capitalize;
 }
