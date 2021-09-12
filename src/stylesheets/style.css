@@ -1,16 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Glory:ital,wght@1,300&display=swap");
+.mt {
+  margin-top: 15px;
+}
+
 .icon {
-  width: 47.619047619%;
+  width: 20px;
 }
 
 .main {
-  min-width: 205px;
+  min-width: 270px;
   width: 18.2291666667%;
   display: flex;
   flex-flow: column;
   font-family: "Glory", sans-serif;
   font-size: 20px;
   color: white;
+}
+
+.flStart {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .text {
@@ -30,6 +41,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 }
 
 .temp-block {
@@ -44,7 +56,7 @@
   display: flex;
   flex-flow: column;
   align-items: flex-start;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .temp-block__right {
@@ -52,7 +64,12 @@
   flex-flow: row;
   justify-content: flex-end;
   align-items: center;
-  align-items: flex-end;
+  align-items: center;
+}
+
+.text-block {
+  display: flex;
+  flex-flow: row;
 }
 
 /*# sourceMappingURL=style.css.map */

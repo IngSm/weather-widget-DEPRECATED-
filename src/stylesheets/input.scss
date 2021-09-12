@@ -55,15 +55,24 @@
   align-items: center;
 }
 
+.mt {
+  margin-top: 15px;
+}
+
 .icon {
-  width: 100px / 210px * 100%;
+  width: 20px;
 }
 
 .main {
-  min-width: 205px;
+  min-width: 270px;
   width: 350px / 1920px * 100%;
   @include fl_col();
   @include mainFont();
+}
+
+.flStart{
+  @include fl_row();
+  @include fl_al_st();
 }
 
 .text {
@@ -78,6 +87,7 @@
 .drop-menu__icon {
   @include fl();
   @include fl_al_st();
+  cursor: pointer;
 }
 
 .temp-block {
@@ -88,11 +98,15 @@
 .temp-block__left {
   @include fl_col();
   align-items: flex-start;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .temp-block__right {
   @include fl_row();
   @include fl_al_end();
-  align-items: flex-end;
+  align-items: center;
+}
+
+.text-block {
+  @include fl_row();
 }

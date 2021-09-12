@@ -1,15 +1,19 @@
 <template>
   <div class="main">
     <div class="drop-menu">
-      <div class="drop-menu__icon">
-        <img class="icon" src="@/assets/svgs/settings.svg" alt="">
+      <div class="drop-menu__icon drop-menu__item">
+        <img @click="openConfig" class="icon" src="@/assets/svgs/settings.svg" alt="">
       </div>
       <div
+        v-text="`${this.currentTime}`"
+        class="drop-menu__text drop-menu__item"
+      />
+      <div
         v-text="`${gottenWeather[0].name},${gottenWeather[0].sys.country}`"
-        class="drop-menu__text"
+        class="drop-menu__text drop-menu__item"
       />
     </div>
-    <div class="temp-block">
+    <div class="temp-block mt">
       <div class="temp-block__left">
         <div 
           class="text"
@@ -17,7 +21,7 @@
         />
         <div 
           class="text"
-          v-html="`Feels: ${gottenWeather[0].main.feels_like.toFixed(0)} &#8451;`"
+          v-html="`Feels: ${Math.floor(gottenWeather[0].main.feels_like)} &#8451;`"
         />
       </div>
       <div class="temp-block__right">
@@ -31,9 +35,33 @@
         />
       </div>
     </div>
-    <div class="text-block">
-      <div class="text-block__left"></div>
-      <div class="text-block__right"></div>
+    <div class="text-block mt">
+      <div class="text-block__left">
+        <div class="flStart">
+          <img class="icon" src="@/assets/svgs/wind.svg" alt="">
+          <div
+            class="text text_marginL"
+            v-text="`${this.gottenWeather[0].wind.speed}kmH`"
+          />
+        </div>
+        <div class="flStart">
+          <img class="icon spclI" src="@/assets/svgs/humidity.svg" alt="">
+          <div
+            class="text text_marginL"
+            v-text="`${this.gottenWeather[0].main.humidity}`"
+          />
+        </div>
+      </div>
+      <div class="text-block__right">
+        <div
+          class="text"
+          v-text="`Visibility:${this.visibility}km`"
+        />
+        <div
+          class="text"
+          v-text="`Pressure:${this.pressure}hPa`"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -44,18 +72,28 @@ import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      city: 'Moscow',
-      code: 'ru'
+      city: 'London',
+      code: 'uk',
+      currentTime: ''
     }
   },
-
   methods: {
+    openConfig () {
+      console.log(1)
+    },
+    updateTime () {
+      this.currentTime = this.$moment().format('ddd DD.MM hh:mm')
+    }
   },
   mounted () {
     axios
       .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city},${this.code}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
       .then(res => {
         this.$store.dispatch('setCityWeather', res.data)
+      })
+      this.currentTime = this.$moment().format('LTS')
+      setInterval(() => {
+        this.updateTime(), 1*10000
       })
   },
   computed: {
@@ -64,6 +102,14 @@ export default {
       }),
       temp () {
         let a = this.gottenWeather[0].main.temp.toFixed(0)
+        return a
+      },
+      visibility () {
+        let a = this.gottenWeather[0].visibility
+        return a / 1000
+      },
+      pressure () {
+        let a = this.gottenWeather[0].main.pressure
         return a
       }
   }
@@ -84,9 +130,9 @@ export default {
 }
 
 .weather-icon {
-  width: 50%;
+  width: 40px;
   height: 1.9em;
-  background-size: cover;
+  background-size: 100%;
   background-repeat: no-repeat;
 }
 
@@ -102,6 +148,22 @@ export default {
 }
 
 .temp-block__text {
-  font-size: 25px;
+  font-size: 24px;
+}
+
+.text-block__left {
+  width: 50%;
+}
+
+.text-block__right {
+  width: 50%;
+}
+
+.text_marginL {
+  margin-left: 5px;
+}
+
+.spclI {
+  height: 20px;
 }
 </style>
