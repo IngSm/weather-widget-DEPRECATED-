@@ -81,12 +81,12 @@
 .display {
   width: 100%;
   height: 115px;
-  border: 1px solid black;
+  border-radius: 20px;
+  background: #FFFFFF;
 }
 
 .input-block {
   width: 100%;
-  border: 1px solid orange;
 }
 
 /*# sourceMappingURL=style.css.map */

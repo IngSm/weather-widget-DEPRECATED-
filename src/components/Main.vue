@@ -90,10 +90,11 @@ export default {
       .then(res => {
         this.$store.dispatch('setCityWeather', res.data)
       })
-      this.currentTime = this.$moment().format('LTS')
+      this.currentTime = this.$moment.utc().format('LTS')
       setInterval(() => {
         this.updateTime(), 1*10000
       })
+      console.log(this.$moment(Number))
   },
   computed: {
       ...mapGetters({
