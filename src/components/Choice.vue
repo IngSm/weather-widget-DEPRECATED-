@@ -2,7 +2,10 @@
   <div class="main">
     <div class="scroll">
       <div class="display">
-        <div v-for="(city, key) in this.gottenCitites" :key="key" class="display__item mt-5">
+        <div
+          v-for="(city, key) in this.gottenCitites"
+          :key="key" class="display__item mt-5"
+        >
           <img class="icon_small icon_drag" src="@/assets/svgs/drag.svg" alt="">
           {{city}}
           <img @click="deleteCity(key)" class="icon_small" src="@/assets/svgs/bin.svg" alt="">
@@ -17,6 +20,7 @@
 </template>
 
 <script scoped>
+import axios from 'axios'
 import { mapGetters } from 'vuex'
 export default {
   data () {
@@ -32,6 +36,11 @@ export default {
   methods: {
     addCity (x) {
       this.$store.dispatch('setCity', x)
+      axios
+      .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
+      .then(res => {
+        this.$store.dispatch('setCityWeather', res.data)
+      })
       this.city = ""
     },
     deleteCity (x) {

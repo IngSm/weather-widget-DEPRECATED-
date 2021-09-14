@@ -93,11 +93,13 @@ export default {
       .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
       .then(res => {
         this.$store.dispatch('setCityWeather', res.data)
+        this.$store.dispatch('setCity', this.city)
       })
       this.currentTime = this.$moment.utc()
       setInterval(() => {
         this.updateTime(), 1*10000
       })
+      console.log(this.gottenCity)
   },
   computed: {
       ...mapGetters({
