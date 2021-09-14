@@ -31,7 +31,7 @@
         />
         <div
           class="temp-block__text"
-          v-html="`${this.temp} &#8451;`"
+          v-html="`${this.gottenWeather[0].main.temp.toFixed(0)} &#8451;`"
         />
       </div>
     </div>
@@ -55,11 +55,11 @@
       <div class="text-block__right">
         <div
           class="text"
-          v-text="`Visibility:${this.visibility} km`"
+          v-text="`Visibility: ${this.visibility} km`"
         />
         <div
           class="text"
-          v-text="`Pressure:${this.pressure} hPa`"
+          v-text="`Pressure: ${this.gottenWeather[0].main.pressure} hPa`"
         />
       </div>
     </div>
@@ -81,7 +81,11 @@ export default {
       console.log(1)
     },
     updateTime () {
-      this.currentTime = this.$moment().format('ddd DD.MM HH:mm')
+      let hours = +(this.$moment.utc().format('H')) + +(this.$moment.unix(this.gottenWeather[0].timezone).utc().format('H'))
+      let minutes = this.$moment().utc().format('mm')
+      let date = this.$moment().utc().format('ddd DD.MM')
+      this.currentTime = `${date} ${hours}:${minutes}`
+      console.log()
     }
   },
   mounted () {
@@ -90,27 +94,19 @@ export default {
       .then(res => {
         this.$store.dispatch('setCityWeather', res.data)
       })
-      this.currentTime = this.$moment.utc().format('LTS')
+      this.currentTime = this.$moment.utc()
       setInterval(() => {
         this.updateTime(), 1*10000
       })
-      console.log(this.$moment(Number))
   },
   computed: {
       ...mapGetters({
-        gottenWeather: 'getCityWeather'
+        gottenWeather: 'getCityWeather',
+        gottenCity: 'getCity'
       }),
-      temp () {
-        let a = this.gottenWeather[0].main.temp.toFixed(0)
-        return a
-      },
       visibility () {
         let a = this.gottenWeather[0].visibility
         return a / 1000
-      },
-      pressure () {
-        let a = this.gottenWeather[0].main.pressure
-        return a
       }
   }
 }
