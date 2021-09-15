@@ -1,22 +1,56 @@
 <template>
   <div id="app">
-    <Main/>
+    <div class="container" v-for="(item, key) in gottenCitites" :key="key">
+      <div @click="open = !open" class="clickable" />
+      <div class="mt"><Main :i="key"/></div>
+    </div>
     <div style="height: 20px;" />
-    <Choice/>
+    <Choice @close="open = false" v-if="open"/>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import geo from '@/api/geo.js'
+import { mapGetters } from 'vuex'
 import Choice from '@/components/Choice.vue'
 import Main from '@/components/Main.vue'
 export default {
   name: "App",
+  data () {
+    return {
+      open: false,
+      userCity: {}
+    }
+  },
+
+  mounted() {
+    geo()
+      .then ( res => {
+        let city = res.city.name
+        axios
+          .get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
+          .then(res => {
+            this.$store.dispatch('setCity', {city: city, weather: res.data})
+          })
+          .catch ( e => {
+            console.log(e)
+          })
+        })
+  },
+
   components: {
     Main,
     Choice
+  },
+  computed: {
+    ...mapGetters({
+        gottenCitites: 'getCity'
+      })
   }
 };
 </script>
 
 <style src="@/stylesheets/style.css">
 </style>
+

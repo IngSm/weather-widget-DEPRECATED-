@@ -73,7 +73,7 @@
 }
 
 .main {
-  min-width: 295px;
+  min-width: 305px;
   min-height: 145px;
   width: 295px / 1920px * 100%;
   @include fl_col();
@@ -131,7 +131,6 @@
   height: 105px;
   @include fl_col();
   border-radius: 20px;
-  padding: 15px;
   box-sizing: border-box;
   background: #FFFFFF;
   color: black;
@@ -140,6 +139,7 @@
 }
 
 .display__item {
+  width: 100%;
   font-size: 15px;
   @include fl_row();
   @include fl_al_space-btwn();
@@ -174,4 +174,17 @@ button {
 button:hover {
   background: #0066CC;
   color: white;
+}
+
+.container {
+  position: relative;
+}
+
+.clickable {
+  position: absolute;
+  width: 20px;
+  height: 21px;
+  top: 16px;
+  left: 15px;
+  cursor: pointer;
 }

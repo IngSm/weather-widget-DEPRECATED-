@@ -17,7 +17,7 @@
 }
 
 .main {
-  min-width: 295px;
+  min-width: 305px;
   min-height: 145px;
   width: 15.3645833333%;
   display: flex;
@@ -93,7 +93,6 @@
   display: flex;
   flex-flow: column;
   border-radius: 20px;
-  padding: 15px;
   box-sizing: border-box;
   background: #FFFFFF;
   color: black;
@@ -102,6 +101,7 @@
 }
 
 .display__item {
+  width: 100%;
   font-size: 15px;
   display: flex;
   flex-flow: row;
@@ -144,6 +144,19 @@ button {
 button:hover {
   background: #0066CC;
   color: white;
+}
+
+.container {
+  position: relative;
+}
+
+.clickable {
+  position: absolute;
+  width: 20px;
+  height: 21px;
+  top: 16px;
+  left: 15px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
