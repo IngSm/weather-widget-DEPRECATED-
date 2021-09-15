@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Glory:ital,wght@1,300&display=swap');
-
 @mixin mainFont {
-  font-family: 'Glory', sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif ;
+  font-size: 20px;
+  color: white;
+}
+
+* {
   font-size: 20px;
   color: white;
 }
@@ -73,9 +76,9 @@
 }
 
 .main {
-  min-width: 305px;
+  min-width: 345px;
   min-height: 145px;
-  width: 295px / 1920px * 100%;
+  width: 30%;
   @include fl_col();
   @include mainFont();
   margin: 0;
@@ -133,16 +136,20 @@
   border-radius: 20px;
   box-sizing: border-box;
   background: #FFFFFF;
-  color: black;
   overflow-x: hidden;
   overflow-y: scroll;
 }
 
 .display__item {
   width: 100%;
+  color: black;
   font-size: 15px;
   @include fl_row();
   @include fl_al_space-btwn();
+}
+
+.display__text {
+  color: black;
 }
 
 .input-block {
@@ -152,6 +159,7 @@
 }
 
 input {
+  width: 60%;
   @include mainFont();
   color: black;
   outline: none;

@@ -7,7 +7,7 @@
           :key="key" class="display__item mt-5"
         >
           <div><img class="icon_small icon_drag" src="@/assets/svgs/drag.svg" alt=""></div>
-          <div>{{city.city}}</div>
+          <div class="display__text">{{city.city}}</div>
           <div><img @click="deleteCity(key)" class="icon_small icon_bin" src="@/assets/svgs/bin.svg" alt=""></div>
         </div>
       </draggable>
@@ -50,9 +50,6 @@ export default {
       })
   },
   methods: {
-    // makeFirst (x, y) {
-    //   this.$store.dispatch('makeCityFirst', x, y)
-    // },
     addCity (x) {
       axios
         .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)

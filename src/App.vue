@@ -10,12 +10,14 @@
 </template>
 
 <script>
+import store from './store'
 import axios from 'axios'
 import geo from '@/api/geo.js'
 import { mapGetters } from 'vuex'
 import Choice from '@/components/Choice.vue'
 import Main from '@/components/Main.vue'
 export default {
+  store,
   name: "App",
   data () {
     return {
@@ -25,6 +27,7 @@ export default {
   },
 
   mounted() {
+    if (this.gottenCitites.length == 0) {
     geo()
       .then ( res => {
         let city = res.city.name
@@ -37,6 +40,7 @@ export default {
             console.log(e)
           })
         })
+    }
   },
 
   components: {
@@ -51,6 +55,6 @@ export default {
 };
 </script>
 
-<style src="@/stylesheets/style.css">
+<style src="./stylesheets/style.css">
 </style>
 
