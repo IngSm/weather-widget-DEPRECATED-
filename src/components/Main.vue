@@ -116,11 +116,11 @@ export default {
 }
 
 .text-block__left {
-  width: 50%;
+  width: 45%;
 }
 
 .text-block__right {
-  width: 50%;
+  width: 60%;
 }
 
 .text_marginL {

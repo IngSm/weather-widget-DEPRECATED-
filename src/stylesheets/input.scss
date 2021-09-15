@@ -76,9 +76,9 @@
 }
 
 .main {
-  min-width: 345px;
+  min-width: 305px;
   min-height: 145px;
-  width: 30%;
+  width: 20%;
   @include fl_col();
   @include mainFont();
   margin: 0;

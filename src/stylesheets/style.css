@@ -21,9 +21,9 @@
 }
 
 .main {
-  min-width: 345px;
+  min-width: 305px;
   min-height: 145px;
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-flow: column;
   font-family: Georgia, "Times New Roman", Times, serif;
