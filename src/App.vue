@@ -28,17 +28,13 @@ export default {
 
   mounted() {
     if (this.gottenCitites.length == 0) {
-    geo()
-      .then ( res => {
-        let city = res.city.name
-        axios
-          .get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
-          .then(res => {
-            this.$store.dispatch('setCity', {city: city, weather: res.data})
-          })
-          .catch ( e => {
-            console.log(e)
-          })
+      axios
+        .get(`http://api.openweathermap.org/data/2.5/weather?q=${'Kassel'}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
+        .then(res => {
+          this.$store.dispatch('setCity', {city: 'Kassel', weather: res.data})
+        })
+        .catch ( e => {
+          console.log(e)
         })
     }
   },
