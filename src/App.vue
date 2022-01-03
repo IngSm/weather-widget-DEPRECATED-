@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container" v-for="(item, key) in gottenCitites" :key="key">
-      <div @click="openMenu()" class="clickable" />
+      <!-- <div @click="openMenu()" class="clickable" /> -->
       <div class="mt"><Main :i="key"/></div>
     </div>
     <div style="height: 20px;" />

@@ -1,11 +1,11 @@
 <template>
   <div class="main">
     <div class="drop-menu">
-      <div @click="" class="drop-menu__icon drop-menu__item">
+      <!-- <div @click="" class="drop-menu__icon drop-menu__item">
         <img class="icon" src="@/assets/svgs/settings.svg" alt="">
-      </div>
+      </div> -->
       <div
-        v-text="`${gottenCity[i].weather.name},${gottenCity[i].weather.sys.country}`"
+        v-text="`${gottenCity[i].weather.name}, ${gottenCity[i].weather.sys.country}`"
         class="drop-menu__text drop-menu__item bold"
       />
     </div>

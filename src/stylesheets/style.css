@@ -7,6 +7,24 @@
   color: black;
 }
 
+body {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  -webkit-app-region: drag;
+  overflow: hidden;
+}
+
+#app {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
 .bold {
   font-weight: 700;
 }
@@ -40,7 +58,7 @@
   color: black;
   margin: 0;
   padding: 15px;
-  background: rgba(102, 178, 255, 0.39);
+  background: rgba(102, 178, 255, 0.8);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.4px);
