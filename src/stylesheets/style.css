@@ -1,6 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;400;700&family=Roboto:wght@300&display=swap");
 * {
+  font-family: "Josefin Slab", serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
   font-size: 20px;
-  color: white;
+  color: black;
+}
+
+.bold {
+  font-weight: 700;
 }
 
 .mt {
@@ -22,18 +30,21 @@
 
 .main {
   min-width: 305px;
-  min-height: 145px;
   width: 20%;
   display: flex;
   flex-flow: column;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Josefin Slab", serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
   font-size: 20px;
-  color: white;
+  color: black;
   margin: 0;
   padding: 15px;
-  background: #66B2FF;
-  border-radius: 20px;
-  box-shadow: -3px 3px #3399FF;
+  background: rgba(102, 178, 255, 0.39);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.4px);
+  border: 1px solid rgba(102, 178, 255, 0.4);
 }
 
 .flStart {
@@ -44,9 +55,11 @@
 }
 
 .text {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Josefin Slab", serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
   font-size: 20px;
-  color: white;
+  color: black;
 }
 
 .drop-menu {
@@ -64,9 +77,11 @@
 }
 
 .temp-block {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Josefin Slab", serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
   font-size: 20px;
-  color: white;
+  color: black;
   display: flex;
   flex-flow: row;
 }
@@ -100,7 +115,7 @@
   box-sizing: border-box;
   background: #FFFFFF;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .display__item {
@@ -127,9 +142,11 @@
 
 input {
   width: 60%;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Josefin Slab", serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
   font-size: 20px;
-  color: white;
+  color: black;
   color: black;
   outline: none;
   appearance: none;
@@ -141,9 +158,11 @@ input {
 button {
   outline: none;
   border: none;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Josefin Slab", serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
   font-size: 20px;
-  color: white;
+  color: black;
   color: black;
   border-radius: 10px;
   padding: 5px 15px;
@@ -161,6 +180,7 @@ button:hover {
 
 .clickable {
   position: absolute;
+  z-index: 10;
   width: 20px;
   height: 21px;
   top: 16px;

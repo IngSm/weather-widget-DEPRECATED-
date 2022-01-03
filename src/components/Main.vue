@@ -1,12 +1,12 @@
 <template>
   <div class="main">
     <div class="drop-menu">
-      <div class="drop-menu__icon drop-menu__item">
+      <div @click="" class="drop-menu__icon drop-menu__item">
         <img class="icon" src="@/assets/svgs/settings.svg" alt="">
       </div>
       <div
         v-text="`${gottenCity[i].weather.name},${gottenCity[i].weather.sys.country}`"
-        class="drop-menu__text drop-menu__item"
+        class="drop-menu__text drop-menu__item bold"
       />
     </div>
     <div class="temp-block mt">
@@ -31,33 +31,10 @@
         />
       </div>
     </div>
-    <div class="text-block mt">
-      <div class="text-block__left">
-        <div class="flStart">
-          <img class="icon" src="@/assets/svgs/wind.svg" alt="">
-          <div
-            class="text text_marginL"
-            v-text="`${this.gottenCity[i].weather.wind.speed} kmH`"
-          />
-        </div>
-        <div class="flStart">
-          <img class="icon spclI" src="@/assets/svgs/humidity.svg" alt="">
-          <div
-            class="text text_marginL"
-            v-text="`${this.gottenCity[i].weather.main.humidity}`"
-          />
-        </div>
-      </div>
-      <div class="text-block__right">
-        <div
-          class="text"
-          v-text="`Visibility: ${this.visibility} km`"
-        />
-        <div
-          class="text"
-          v-text="`Pressure: ${this.gottenCity[i].weather.main.pressure} hPa`"
-        />
-      </div>
+    <div class="clock-block">
+      <div
+        v-text="time" 
+      />
     </div>
   </div>
 </template>
@@ -70,10 +47,26 @@ export default {
   },
   data () {
     return {
-      city: 'Novosibirsk'
+      city: 'Novosibirsk',
+      time: this.$date().format(),
+      timeZones: []
     }
   },
   methods: {
+    makeClock() {
+      let zone = this.timeZones[0][0].name
+      // let current = this.$moment.tz(this.time, zone).format('YYYY-MM-DD HH:ss')
+      let add = this.$date().add(1, 'hour')
+      let current = this.$date(add).tz(zone)
+      this.time = current
+    }
+  },
+
+  mounted() {
+    setInterval(() => {
+      this.makeClock()
+    }, 1000)
+    this.timeZones.push(this.$moment.tz.zonesForCountry(this.gottenCity[this.i].weather.sys.country, true))
   },
   
   computed: {
@@ -83,7 +76,7 @@ export default {
       visibility () {
         let a = this.gottenCity[this.i].weather.visibility
         return a / 1000
-      }
+      },
   }
 }
 </script>
