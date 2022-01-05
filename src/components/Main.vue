@@ -1,9 +1,10 @@
 <template>
-  <div class="main">
+  <div :style="returnStyle()" class="main">
     <div class="drop-menu">
-      <!-- <div @click="" class="drop-menu__icon drop-menu__item">
+      <div @click="" class="drop-menu__icon drop-menu__item">
         <img class="icon" src="@/assets/svgs/settings.svg" alt="">
-      </div> -->
+        <img class="icon second__icon" src="@/assets/svgs/drag_whole.svg" alt="">
+      </div>
       <div
         v-text="`${gottenCity[i].weather.name}, ${gottenCity[i].weather.sys.country}`"
         class="drop-menu__text drop-menu__item bold"
@@ -48,18 +49,32 @@ export default {
   data () {
     return {
       city: 'Novosibirsk',
-      time: this.$date().format(),
+      time: this.$date().format('ddd DD MMM YYYY HH:mm:ss'),
       timeZones: []
     }
   },
   methods: {
     makeClock() {
-      let zone = this.timeZones[0][0].name
-      // let current = this.$moment.tz(this.time, zone).format('YYYY-MM-DD HH:ss')
-      let add = this.$date().add(1, 'hour')
-      let current = this.$date(add).tz(zone)
-      this.time = current
+      if (this.gottenCity[this.i].weather.name == 'Kassel') {
+        let zone = this.timeZones[0][0].name
+        // let current = this.$moment.tz(this.time, zone).format('YYYY-MM-DD HH:ss')
+        let add = this.$date().add(1, 'hour')
+        let current = this.$date(add).tz(zone)
+        this.time = current
+      } else {
+        let current = this.$date().format('ddd DD MMM YYYY HH:mm:ss')
+        this.time = current
+      }
+    },
+    returnStyle() {
+    if (this.gottenCity[this.i].weather.main.temp.toFixed(0) < 0) {
+      return ''
+    } else if ( this.gottenCity[this.i].weather.main.temp.toFixed(0) < 10 ) {
+      return 'background: rgba(240, 255, 0, 0.8);'
+    } else if ( this.gottenCity[this.i].weather.main.temp.toFixed(0) > 10 ) {
+      return 'background: rgba(38, 255, 0, 0.8);'
     }
+  },
   },
 
   mounted() {
@@ -84,6 +99,11 @@ export default {
 <style scoped>
 .text {
   text-transform: capitalize;
+}
+
+.second__icon {
+  margin-left: 10px;
+  cursor: grab;
 }
 
 .weather-icon {

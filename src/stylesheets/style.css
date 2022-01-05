@@ -11,7 +11,7 @@ body {
   display: grid;
   margin: 0;
   padding: 0;
-  -webkit-app-region: drag;
+  /* -webkit-app-region: drag; */
   overflow: hidden;
 }
 
@@ -204,6 +204,17 @@ button:hover {
   top: 16px;
   left: 15px;
   cursor: pointer;
+}
+
+.second__click {
+  position: absolute;
+  z-index: 10;
+  width: 20px;
+  height: 21px;
+  top: 16px;
+  left: 45px;
+  -webkit-app-region: drag;
+  cursor: grab !important;
 }
 
 /*# sourceMappingURL=style.css.map */
