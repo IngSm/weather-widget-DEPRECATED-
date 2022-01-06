@@ -13,7 +13,7 @@
 <script>
 import store from './store'
 import axios from 'axios'
-// import geo from '@/api/geo.js'
+import geo from '@/api/geo.js'
 import { mapGetters } from 'vuex'
 import Choice from '@/components/Choice.vue'
 import Main from '@/components/Main.vue'
@@ -29,24 +29,22 @@ export default {
 
   mounted() {
     if (this.gottenCitites.length == 0) {
-      axios
-        .get(`http://api.openweathermap.org/data/2.5/weather?q=${'Kassel'}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
-        .then(res => {
-          this.$store.dispatch('setCity', {city: 'Kassel', weather: res.data})
-        })
-        .catch ( e => {
-          console.log(e)
+       geo()
+        .then ( res => {
+          let city = res.city.name
+          axios
+            .get(`http://api.openweathermap.org/data/2.5/weather?q=${`${city}`}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
+            .then(res => {
+              console.log(geo)
+              this.$store.dispatch('setCity', {city: city, weather: res.data})
+            })
+            .catch ( e => {
+              console.log(e)
+            })
         })
     }
     setInterval(() => {
-      axios
-        .get(`http://api.openweathermap.org/data/2.5/weather?q=${'Kassel'}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
-        .then(res => {
-          this.$store.dispatch('setCity', {city: 'Kassel', weather: res.data})
-        })
-        .catch ( e => {
-          console.log(e)
-        })
+      this.update()
     }, 3600000)
   },
 
@@ -62,6 +60,20 @@ export default {
   methods: {
     openMenu() {
       this.open = !this.open
+    },
+    update() {
+      let cities = [];
+      this.gottenCitites.forEach(item => {
+        axios
+          .get(`http://api.openweathermap.org/data/2.5/weather?q=${`${item.city}`}&units=metric&APPID=d23058db742db7cb6fe57437bd010579`)
+          .then(res => {
+            cities.push({ city: `${item.city}`, weather: res.data })
+          })
+          .catch ( e => {
+            console.log(e)
+          })
+      })
+      this.$store.dispatch('commitUpdateList', cities)
     }
   }
 };
