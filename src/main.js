@@ -4,10 +4,13 @@ import "./registerServiceWorker";
 import store from "./store";
 import axios from "axios";
 import VueAxios from "vue-axios";
-
-Vue.use(require('vue-moment'));
+// import VueDayjs from 'vue-dayjs-plugin'
+import '@/plugins/day';
+import '@/plugins/moment';
 
 Vue.use(VueAxios, axios);
+
+// Vue.use(VueDayjs)
 
 Vue.config.productionTip = false;
 

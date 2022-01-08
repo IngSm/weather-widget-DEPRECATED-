@@ -34,6 +34,9 @@ export default new Vuex.Store({
     },
     makeCityFirst (context, city) {
       context.commit('makeCityFirst', city)
+    },
+    commitUpdateList (context, city) {
+      context.commit('updateList', city)
     }
   },
   modules: {},

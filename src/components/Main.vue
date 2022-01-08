@@ -1,12 +1,13 @@
 <template>
-  <div class="main">
+  <div :style="returnStyle()" class="main">
     <div class="drop-menu">
-      <div class="drop-menu__icon drop-menu__item">
+      <div @click="" class="drop-menu__icon drop-menu__item">
         <img class="icon" src="@/assets/svgs/settings.svg" alt="">
+        <img class="icon second__icon" src="@/assets/svgs/drag_whole.svg" alt="">
       </div>
       <div
-        v-text="`${gottenCity[i].weather.name},${gottenCity[i].weather.sys.country}`"
-        class="drop-menu__text drop-menu__item"
+        v-text="`${gottenCity[i].weather.name}, ${gottenCity[i].weather.sys.country}`"
+        class="drop-menu__text drop-menu__item bold"
       />
     </div>
     <div class="temp-block mt">
@@ -31,33 +32,10 @@
         />
       </div>
     </div>
-    <div class="text-block mt">
-      <div class="text-block__left">
-        <div class="flStart">
-          <img class="icon" src="@/assets/svgs/wind.svg" alt="">
-          <div
-            class="text text_marginL"
-            v-text="`${this.gottenCity[i].weather.wind.speed} kmH`"
-          />
-        </div>
-        <div class="flStart">
-          <img class="icon spclI" src="@/assets/svgs/humidity.svg" alt="">
-          <div
-            class="text text_marginL"
-            v-text="`${this.gottenCity[i].weather.main.humidity}`"
-          />
-        </div>
-      </div>
-      <div class="text-block__right">
-        <div
-          class="text"
-          v-text="`Visibility: ${this.visibility} km`"
-        />
-        <div
-          class="text"
-          v-text="`Pressure: ${this.gottenCity[i].weather.main.pressure} hPa`"
-        />
-      </div>
+    <div class="clock-block">
+      <div
+        v-text="time" 
+      />
     </div>
   </div>
 </template>
@@ -70,10 +48,33 @@ export default {
   },
   data () {
     return {
-      city: 'Novosibirsk'
+      city: 'Novosibirsk',
+      time: this.$date().format('ddd DD MMM YYYY HH:mm:ss'),
+      timeZones: []
     }
   },
   methods: {
+    makeClock() {
+      let tz = this.gottenCity[this.i].weather.timezone
+      let date = new Date((new Date().getTime())+tz*1000)
+      this.time = date.toUTCString()
+    },
+    returnStyle() {
+    if (this.gottenCity[this.i].weather.main.temp.toFixed(0) < 0) {
+      return ''
+    } else if ( this.gottenCity[this.i].weather.main.temp.toFixed(0) < 10 ) {
+      return 'background: rgba(240, 255, 0, 0.8);'
+    } else if ( this.gottenCity[this.i].weather.main.temp.toFixed(0) > 10 ) {
+      return 'background: rgba(38, 255, 0, 0.8);'
+    }
+  },
+  },
+
+  mounted() {
+    setInterval(() => {
+      this.makeClock()
+    }, 1000)
+    this.timeZones.push(this.$moment.tz.zonesForCountry(this.gottenCity[this.i].weather.sys.country, true))
   },
   
   computed: {
@@ -83,7 +84,7 @@ export default {
       visibility () {
         let a = this.gottenCity[this.i].weather.visibility
         return a / 1000
-      }
+      },
   }
 }
 </script>
@@ -91,6 +92,11 @@ export default {
 <style scoped>
 .text {
   text-transform: capitalize;
+}
+
+.second__icon {
+  margin-left: 10px;
+  cursor: grab;
 }
 
 .weather-icon {
