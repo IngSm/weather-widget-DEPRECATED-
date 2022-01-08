@@ -1,18 +1,16 @@
-# weather-widget
+Hello, everybody!
+
+This is a simple widget for usage on your website or on your desktop. 
+
+I created this widget, because I failed to find some ready solutions for desktop widgets on windows machines.
+
+At first it was a test task for a company:D
+
+Please, buy me a coffe for this work, if it is useful for ypu:)
 
 ## Project setup
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
 ```
 
 ### Compiles and minifies for production as a web component
