@@ -2,10 +2,9 @@
   "name": "weather-widget",
   "version": "1.0.0",
   "private": true,
-  "author": {
-    "name": "Alexander Gorbunov",
-    "email": "terradrag@yandex.ru"
-  },
+  "author": "Alexander Gorbunov",
+  "email": "terradrag@yandex.ru",
+  "description": "widget-weather",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -14,15 +13,18 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "start": "npm run serve",
+    "start": "electron-forge start",
     "wc-build": "npm run build -- --target wc --inline-vue --name weather-widget",
-    "wc-test": "cd dist && live-server --port=8080 --entry-file=./demo.html"
+    "wc-test": "cd dist && live-server --port=8080 --entry-file=./demo.html",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
-  "main": "background.js",
+  "main": "./src/background.js",
   "dependencies": {
     "axios": "^0.21.4",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.7",
+    "electron-squirrel-startup": "^1.0.0",
     "moment-timer": "^1.3.0",
     "moment-timezone": "^0.5.34",
     "register-service-worker": "^1.7.1",
@@ -36,6 +38,11 @@
     "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+    "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-pwa": "~4.5.0",
@@ -86,5 +93,32 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "weather_widget"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
 }
