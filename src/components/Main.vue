@@ -55,16 +55,9 @@ export default {
   },
   methods: {
     makeClock() {
-      if (this.gottenCity[this.i].weather.name == 'Kassel') {
-        let zone = this.timeZones[0][0].name
-        // let current = this.$moment.tz(this.time, zone).format('YYYY-MM-DD HH:ss')
-        let add = this.$date().add(1, 'hour')
-        let current = this.$date(add).tz(zone)
-        this.time = current
-      } else {
-        let current = this.$date().format('ddd DD MMM YYYY HH:mm:ss')
-        this.time = current
-      }
+      let tz = this.gottenCity[this.i].weather.timezone
+      let date = new Date((new Date().getTime())+tz*1000)
+      this.time = date.toUTCString()
     },
     returnStyle() {
     if (this.gottenCity[this.i].weather.main.temp.toFixed(0) < 0) {
