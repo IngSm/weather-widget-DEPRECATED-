@@ -6,7 +6,7 @@ I created this widget, because I failed to find some ready solutions for desktop
 
 At first it was a test task for a company:D
 
-Please, buy me a coffe for this work, if it is useful for ypu:)
+Please, buy me a coffee for this work, if it is useful for you:)
 
 ## Project setup
 ```
